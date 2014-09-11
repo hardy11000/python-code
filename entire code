@@ -1,0 +1,58 @@
+cd /mnt01/girish
+import pandas as pd
+import numpy as np
+import re
+from pandas import Series
+from numpy import nan as na
+from sklearn.decomposition import NMF
+zones_noint=pd.read_csv("zones_noint.csv")
+zones_noint.head()
+Useractivity_data=pd.read_csv('UserActivity.csv')
+sample=Useractivity_data[['UserID','Zone','PageViews']]
+merged=pd.merge(zones_noint,sample,on='Zone',how='left')
+merged=merged[['Zone_map','UserID','PageViews']]
+merged1=merged.groupby(['UserID','Zone_map']).sum()
+merged2=merged1.unstack()
+
+sample2=pd.read_csv("Alzheimers_affinity_zones.csv")
+combined=pd.merge(sample2,zones_noint,how="left",on="Zone")
+subset=merged2.ix[:,[0,64,71,200,202,204,213,237,270, 292,733,843,1136,1137,                                                                                        1183,1484,1544,1638,1666,1720,1723,1739,1836]]
+
+subset1.index
+#Int64Index([2, 7, 11, 12, 18, 19, 23, 24, 25, 26, 30, 32, 33, 35, 37, 38, 41, 61, 68, 69, 70, 71, 76, 84, 87, 88, 91, 94, 97, 108, 114, 115, 118, 121, 122, 123, 124, 127, 128, 130, 133, 137, 145, 146, 153, 154, 161, 166, 172, 173, 187, 188, 196, 210, 213, 215, 218, 223, 225, 226, 229, 235, 236, 242, 250, 251, 253, 263, 267, 270, 271, 284, 301, 307, 308, 317, 320, 323, 324, 325, 333, 334, 340, 343, 353, 364, 365, 371, 373, 374, 379, 380, 381, 386, 387, 389, 391, 397, 398, 405, ...], dtype='int64')
+userid[subset1.index]
+subset['total']=subset.ix[:,1:].sum(axis=1)
+subset1=subset.ix[:,2:].dropna(how='all')
+Useractivity_data=Useractivity_data[Useractivity_data['PageViews']<1000
+*Give the name of Alzehemier dataset and the unstacked data set(aggregated data set with functions)
+reduced=Useractivity_data[Useractivity_data['ConditionID']==10004]
+reduced=reduced[['UserID','ConditionID']]
+reduced=reduced.drop_duplicates()
+l=list(reduced[‘UserID’])
+reduced.duplicated().value_counts()
+UserID_Alzehmier=reduced.ix[:,0]
+l=list(merged2[~(merged2.ix[:,3].isnull())]['UserID'])
+data.events.unique()
+merged2=merged2.reset_index()
+total_non_missing=merged2.count()
+total_non_missing.head()
+Intersection= merged2[~(merged2.ix[:,i].isnull()) & (merged2['UserID'].isin (l))][merged2.ix[:,i]].count()  
+z=[ ]
+ for i in range(1,2142):
+...    s=list(merged2[~(merged2.ix[:,i].isnull())]['UserID'])
+...    intersection=len(set(s).intersection(set(l)))
+...    z.append(intersection)
+...
+y=merged2.count()
+ y[1]
+for i in range(1,2142):
+...    x=(z[i-1]*1.0)/y[i]
+...    x1=(z[i-1]*1.0)/len(l)
+...    s1.append(x)
+...    s2.append(x1)
+...
+
+data={'precision':s1,'recall':s2,'Non_missing':y}
+data=DataFrame(data)
+data['Zone_map']=np.arange(1,2142)
+data=DataFrame(data,columns=['Zone_map','precision','recall','Non_missing'])
